@@ -13,6 +13,7 @@ _roscomplete_rosws_switch() {
 }
 
 rosws_switch() {
+    source $ROS_ROOT/../../setup.bash
     if [ -e $ROSWS_HOME_DIR/$1/setup.bash ]; then
         source $ROSWS_HOME_DIR/$1/setup.bash
     elif [ -e $ROSWS_HOME_DIR/$1/devel/setup.bash ]; then
@@ -20,6 +21,7 @@ rosws_switch() {
     fi
     # HACK prepend stuff that should go even before this in path
     export PATH=$ROS_PATH_OVERLAY:$PATH
+    cd $ROSWS_HOME_DIR/$1
 }
 
 complete -F _roscomplete_rosws_switch rosws_switch
