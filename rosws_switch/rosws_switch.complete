@@ -19,8 +19,9 @@ rosws_switch() {
     elif [ -e $ROSWS_HOME_DIR/$1/devel/setup.bash ]; then
         source $ROSWS_HOME_DIR/$1/devel/setup.bash
     fi
-    # HACK prepend stuff that should go even before this in path
-    export PATH=$ROS_PATH_OVERLAY:$PATH
+
+    # HACK append rosbuild stuff
+    export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$ROS_PACKAGE_PATH_ROSBUILD
     cd $ROSWS_HOME_DIR/$1
 }
 
