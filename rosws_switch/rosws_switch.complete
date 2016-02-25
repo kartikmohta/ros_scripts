@@ -13,16 +13,18 @@ _roscomplete_rosws_switch() {
 }
 
 rosws_switch() {
+    TARGET_WS=${1}
     source $ROS_ROOT/../../setup.bash
-    if [ -e $ROSWS_HOME_DIR/$1/setup.bash ]; then
-        source $ROSWS_HOME_DIR/$1/setup.bash
-    elif [ -e $ROSWS_HOME_DIR/$1/devel/setup.bash ]; then
-        source $ROSWS_HOME_DIR/$1/devel/setup.bash
+    if [ -e $ROSWS_HOME_DIR/${TARGET_WS}/setup.bash ]; then
+        source $ROSWS_HOME_DIR/${TARGET_WS}/setup.bash
+    elif [ -e $ROSWS_HOME_DIR/${TARGET_WS}/devel/setup.bash ]; then
+        source $ROSWS_HOME_DIR/${TARGET_WS}/devel/setup.bash
     fi
 
     # HACK append rosbuild stuff
     export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$ROS_PACKAGE_PATH_ROSBUILD
-    cd $ROSWS_HOME_DIR/$1
+
+    cd $ROSWS_HOME_DIR/${TARGET_WS}
 }
 
 complete -F _roscomplete_rosws_switch rosws_switch
