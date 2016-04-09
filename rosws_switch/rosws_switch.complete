@@ -28,3 +28,7 @@ rosws_switch() {
 }
 
 complete -F _roscomplete_rosws_switch rosws_switch
+
+# Adding an alias
+alias wssw="rosws_switch"
+complete -F _roscomplete_rosws_switch wssw
