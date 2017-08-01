@@ -6,7 +6,7 @@ _roscomplete_rosws_switch() {
     local cur WORKSPACES
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
-    WORKSPACES=$(find $ROSWS_HOME_DIR -mindepth 1 -maxdepth 1 -type d | grep -v "^.$" | sed 's/.*\///')
+    WORKSPACES=$(find $ROSWS_HOME_DIR -mindepth 1 -maxdepth 1 -xtype d | grep -v "^.$" | sed 's/.*\///')
 
     COMPREPLY=( $(compgen -W "${WORKSPACES}" -- ${cur}) )
     return 0
