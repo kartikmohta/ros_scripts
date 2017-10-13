@@ -17,6 +17,8 @@ rosws_switch() {
     source $ROS_ROOT/../../setup.bash
     if [ -e $ROSWS_HOME_DIR/${TARGET_WS}/setup.bash ]; then
         source $ROSWS_HOME_DIR/${TARGET_WS}/setup.bash
+    elif [ -e $ROSWS_HOME_DIR/${TARGET_WS}/install/setup.bash ]; then
+        source $ROSWS_HOME_DIR/${TARGET_WS}/install/setup.bash
     elif [ -e $ROSWS_HOME_DIR/${TARGET_WS}/devel/setup.bash ]; then
         source $ROSWS_HOME_DIR/${TARGET_WS}/devel/setup.bash
     fi
