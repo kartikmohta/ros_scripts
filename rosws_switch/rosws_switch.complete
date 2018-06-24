@@ -1,4 +1,4 @@
-if [ -z $ROSWS_HOME_DIR ]; then
+if [ -z ${ROSWS_HOME_DIR} ]; then
     echo rosws_switch: Please set ROSWS_HOME_DIR to the directory containing ROS workspaces for this script to work.
 fi
 
@@ -6,7 +6,7 @@ _roscomplete_rosws_switch() {
     local cur WORKSPACES
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
-    WORKSPACES=$(find $ROSWS_HOME_DIR -mindepth 1 -maxdepth 1 -xtype d | grep -v "^.$" | sed 's/.*\///')
+    WORKSPACES=$(find ${ROSWS_HOME_DIR} -mindepth 1 -maxdepth 1 -xtype d | grep -v "^.$" | sed 's/.*\///')
 
     COMPREPLY=( $(compgen -W "${WORKSPACES}" -- ${cur}) )
     return 0
@@ -14,19 +14,19 @@ _roscomplete_rosws_switch() {
 
 rosws_switch() {
     TARGET_WS=${1}
-    source $ROS_ROOT/../../setup.bash
-    if [ -e $ROSWS_HOME_DIR/${TARGET_WS}/setup.bash ]; then
-        source $ROSWS_HOME_DIR/${TARGET_WS}/setup.bash
-    elif [ -e $ROSWS_HOME_DIR/${TARGET_WS}/install/setup.bash ]; then
-        source $ROSWS_HOME_DIR/${TARGET_WS}/install/setup.bash
-    elif [ -e $ROSWS_HOME_DIR/${TARGET_WS}/devel/setup.bash ]; then
-        source $ROSWS_HOME_DIR/${TARGET_WS}/devel/setup.bash
+    source ${ROS_ROOT}/../../setup.bash
+    if [ -e ${ROSWS_HOME_DIR}/${TARGET_WS}/setup.bash ]; then
+        source ${ROSWS_HOME_DIR}/${TARGET_WS}/setup.bash
+    elif [ -e ${ROSWS_HOME_DIR}/${TARGET_WS}/install/setup.bash ]; then
+        source ${ROSWS_HOME_DIR}/${TARGET_WS}/install/setup.bash
+    elif [ -e ${ROSWS_HOME_DIR}/${TARGET_WS}/devel/setup.bash ]; then
+        source ${ROSWS_HOME_DIR}/${TARGET_WS}/devel/setup.bash
     fi
 
     # HACK append rosbuild stuff
-    export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$ROS_PACKAGE_PATH_ROSBUILD
+    # export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:${ROS_PACKAGE_PATH_ROSBUILD}
 
-    cd $ROSWS_HOME_DIR/${TARGET_WS}
+    cd ${ROSWS_HOME_DIR}/${TARGET_WS}
 }
 
 complete -F _roscomplete_rosws_switch rosws_switch
